@@ -9,6 +9,9 @@ dist/*
 /tmp
 /out-tsc
 
+# environments
+.env
+
 # dependencies
 /node_modules
 
