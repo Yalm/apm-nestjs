@@ -52,6 +52,24 @@
       "compilerOptions": {
         "tsConfigPath": "libs/apm/tsconfig.lib.json"
       }
+    },
+    "user-client": {
+      "type": "library",
+      "root": "libs/user-client",
+      "entryFile": "index",
+      "sourceRoot": "libs/user-client/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/user-client/tsconfig.lib.json"
+      }
+    },
+    "common": {
+      "type": "library",
+      "root": "libs/common",
+      "entryFile": "index",
+      "sourceRoot": "libs/common/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/common/tsconfig.lib.json"
+      }
     }
   }
 }

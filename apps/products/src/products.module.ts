@@ -4,7 +4,7 @@ import { ProductsService } from "./products.service";
 import { ApmModule } from "@app/apm";
 
 @Module({
-  imports: [ApmModule.forRoot({ serviceName: "products" })],
+  imports: [ApmModule.forRoot()],
   controllers: [ProductsController],
   providers: [ProductsService],
 })

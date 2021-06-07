@@ -1,4 +1,4 @@
 import { ProductsModule } from "./products.module";
-import { AppFactory } from '@app/core';
+import { AppFactory } from "@app/core";
 
-AppFactory.createMicroservice(ProductsModule, 9999);
+AppFactory.createMicroservice(ProductsModule, { serviceName: "products" });

@@ -1,17 +1,18 @@
-import { Body, Controller, Get, Inject, Post, Query } from "@nestjs/common";
-import { ClientProxy } from "@nestjs/microservices";
-
+import { Body, Controller, Post } from "@nestjs/common";
+import { UserClientService } from "@app/user-client";
+import { ApmTransaction } from "@app/apm";
 @Controller("users")
 export class UsersController {
-  constructor(@Inject("users") private client: ClientProxy) {}
-
-  @Get()
-  getHello(@Query() query: object) {
-    return this.client.send<string>({ cmd: "user.find" }, query);
-  }
+  constructor(private userClientService: UserClientService) { }
 
   @Post()
-  getProducts(@Body() body: object) {
-    return this.client.send<string>({ cmd: "user.create" }, body);
+  getProducts(
+    @Body() body: Record<string, any>,
+    @ApmTransaction() transaction: string
+  ) {
+    return this.userClientService.userCreate({
+      value: { email: body.email, name: body.name },
+      headers: { transaction },
+    });
   }
 }

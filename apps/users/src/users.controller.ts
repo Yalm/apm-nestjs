@@ -1,24 +1,32 @@
+import { Transaction, TransactionParam } from "@app/apm";
 import { Controller } from "@nestjs/common";
-import { Ctx, EventPattern, MessagePattern } from "@nestjs/microservices";
+import { EventPattern, MessagePattern, Payload } from "@nestjs/microservices";
 import { CreateUserDto } from "./dtos/create-user.dto";
+import { UserDocument } from "./schemas/user.schema";
 import { UsersService } from "./users.service";
 
 @Controller()
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
-  @MessagePattern({ cmd: "user.find" })
-  findAllUsers() {
-    return this.usersService.findAll();
+  @MessagePattern("user.find")
+  findAllUsers(@TransactionParam() transaction: Transaction) {
+    return this.usersService.findAll(transaction);
   }
 
-  @MessagePattern({ cmd: "user.create" })
-  create(data: CreateUserDto) {
-    return this.usersService.create(data);
+  @MessagePattern("user.create")
+  create(
+    @Payload() message: CreateUserDto,
+    @TransactionParam() transaction: Transaction
+  ) {
+    return this.usersService.create(message, transaction);
   }
 
   @EventPattern("user.created")
-  handleUserCreated() {
-    // business logic
+  handleUserCreated(
+    @Payload() user: UserDocument,
+    @TransactionParam() transaction: Transaction
+  ) {
+    console.log('hola');
   }
 }

@@ -23,6 +23,18 @@
       ],
       "@app/apm/*": [
         "libs/apm/src/*"
+      ],
+      "@app/user-client": [
+        "libs/user-client/src"
+      ],
+      "@app/user-client/*": [
+        "libs/user-client/src/*"
+      ],
+      "@app/common": [
+        "libs/common/src"
+      ],
+      "@app/common/*": [
+        "libs/common/src/*"
       ]
     }
   }

@@ -10,6 +10,13 @@ services:
         volumes:
             - mongodb_data_container:/data/db
 
+    rabbitmq:
+        image: 'rabbitmq:3.8.16-alpine'
+        ports:
+            - '5672:5672'
+        networks:
+            - elastic
+        
     apm-server:
         image: docker.elastic.co/apm/apm-server:7.12.1
         depends_on:

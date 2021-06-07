@@ -1,8 +1,8 @@
-import { Module } from "@nestjs/common";
 import { ApmModule } from "@app/apm";
+import { Module } from "@nestjs/common";
 import { UsersModule } from "./users/users.module";
 
 @Module({
-  imports: [ApmModule.forRoot({ global: true }), UsersModule],
+  imports: [UsersModule, ApmModule.forRoot({ global: true })],
 })
 export class AppModule {}
